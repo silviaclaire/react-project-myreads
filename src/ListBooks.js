@@ -16,10 +16,12 @@ const bookshelves = [
 
 class ListBooks extends React.Component {
   static propTypes = {
-    books: PropTypes.array.isRequired
+    books: PropTypes.array.isRequired,
+    onUpdateShelf: PropTypes.func.isRequired
   }
 
   render() {
+    const { books, onUpdateShelf } = this.props
     return (
       <div>
         <div className="list-books">
@@ -33,9 +35,9 @@ class ListBooks extends React.Component {
                   <h2 className="bookshelf-title">{bookshelf.title}</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">
-                      {this.props.books
+                      {books
                         .filter(book => book.shelf === bookshelf.name)
-                        .map(book =>
+                        .map(book => (
                           <li key={book.id}>
                             <div className="book">
                               <div className="book-top">
@@ -44,7 +46,9 @@ class ListBooks extends React.Component {
                                   backgroundImage: `url(${book.imageLinks.thumbnail})`
                                 }}/>
                                 <div className="book-shelf-changer">
-                                  <select defaultValue={book.shelf}>
+                                  <select
+                                    onChange={(e) => onUpdateShelf(book, e.target.value)}
+                                    defaultValue={book.shelf}>
                                     <option value="none" disabled>Move to...</option>
                                     <option value="currentlyReading">Currently Reading</option>
                                     <option value="wantToRead">Want to Read</option>
@@ -57,7 +61,7 @@ class ListBooks extends React.Component {
                               <div className="book-authors">{book.authors}</div>
                             </div>
                           </li>
-                        )
+                        ))
                       }
                     </ol>
                   </div>
