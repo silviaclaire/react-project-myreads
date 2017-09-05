@@ -18,11 +18,12 @@ const bookshelves = [
 class ListBooks extends React.Component {
   static propTypes = {
     books: PropTypes.array.isRequired,
-    onUpdateShelf: PropTypes.func.isRequired
+    onUpdateShelf: PropTypes.func.isRequired,
+    getShelf: PropTypes.func.isRequired
   }
 
   render() {
-    const { books, onUpdateShelf } = this.props
+    const { books, onUpdateShelf, getShelf } = this.props
     return (
       <div>
         <div className="list-books">
@@ -38,6 +39,7 @@ class ListBooks extends React.Component {
                     <ShowBooks
                       books={books.filter(book => book.shelf === bookshelf.name)}
                       onUpdateShelf={onUpdateShelf}
+                      getShelf={getShelf}
                     />
                   </div>
                 </div>

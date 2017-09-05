@@ -4,11 +4,12 @@ import PropTypes from 'prop-types'
 class ShowBooks extends React.Component {
   static propTypes = {
     books: PropTypes.array.isRequired,
-    onUpdateShelf: PropTypes.func.isRequired
+    onUpdateShelf: PropTypes.func.isRequired,
+    getShelf: PropTypes.func.isRequired
   }
 
   render() {
-    const { books, onUpdateShelf } = this.props
+    const { books, onUpdateShelf, getShelf } = this.props
     return (
       <ol className="books-grid">
         {books.map(book => (
@@ -22,7 +23,7 @@ class ShowBooks extends React.Component {
                 <div className="book-shelf-changer">
                   <select
                     onChange={(e) => onUpdateShelf(book, e.target.value)}
-                    defaultValue={book.shelf}>
+                    defaultValue={getShelf(book.id)}>
                     <option value="none" disabled>Move to...</option>
                     <option value="currentlyReading">Currently Reading</option>
                     <option value="wantToRead">Want to Read</option>

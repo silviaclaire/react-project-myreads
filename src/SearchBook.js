@@ -8,6 +8,7 @@ import sortBy from 'sort-by'
 class SearchBook extends React.Component {
   static propTypes = {
     onUpdateShelf: PropTypes.func.isRequired,
+    getShelf: PropTypes.func.isRequired
   }
 
   state = {
@@ -26,7 +27,7 @@ class SearchBook extends React.Component {
   }
 
   render() {
-    const { onUpdateShelf } = this.props
+    const { onUpdateShelf, getShelf } = this.props
     const { query, showingBooks } = this.state
 
     return (
@@ -49,6 +50,7 @@ class SearchBook extends React.Component {
           <ShowBooks
             books={showingBooks}
             onUpdateShelf={onUpdateShelf}
+            getShelf={getShelf}
           />
         </div>
       </div>
